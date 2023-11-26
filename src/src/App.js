@@ -1,26 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
 
 function App() {
+  console.log("This is console window");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect( () => {
-    if(localStorage.getItem("This") === "1"){
-      setIsLoggedIn(true);
-    }
-  }, []);
+  console.log("this is our app here")
+  
 
-  const loginHandler = (email, password, college) => {
-    localStorage.setItem("This", "1");
+  const loginHandler = (email, password) => {
     setIsLoggedIn(true);
-
   };
 
   const logoutHandler = () => {
-    localStorage.removeItem("This");
     setIsLoggedIn(false);
   };
 
