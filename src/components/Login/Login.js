@@ -1,9 +1,11 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState, useReducer, useContext} from 'react';
 
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
 import Button from '../UI/Button/Button';
+import AuthContext from '../../Store/AuthContext';
+import Input from '../UI/Input/Input';
 
 
 const emailReducer = (state, action) => {
@@ -29,6 +31,8 @@ const passwordReducer = (state, action) => {
 }
 
 const Login = (props) => {
+
+  const ctx = useContext(AuthContext)
   // const [enteredEmail, setEnteredEmail] = useState('');
   // const [emailIsValid, setEmailIsValid] = useState();
 
@@ -111,7 +115,7 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
     // event.preventDefault();
-    props.onLogin(emailState.value, passwordState.value, enteredCollege);
+    ctx.onLogin(emailState.value, passwordState.value, enteredCollege);
   };
 
   return (
@@ -123,13 +127,15 @@ const Login = (props) => {
           }`}
         >
           <label htmlFor="email">E-Mail</label>
-          <input
+          <Input type={"email"} id={"email"} value={emailState.value} onChange={emailChangeHandler}
+            onBlur={validateEmailHandler}/>
+          {/* <input
             type="email"
             id="email"
             value={emailState.value}
             onChange={emailChangeHandler}
             onBlur={validateEmailHandler}
-          />
+          /> */}
         </div>
         <div
           className={`${classes.control} ${
@@ -137,13 +143,15 @@ const Login = (props) => {
           }`}
         >
           <label htmlFor="password">Password</label>
-          <input
+          <Input type={"password"} id={"password"} value={passwordState.value} onChange={passwordChangeHandler}
+            onBlur={validatePasswordHandler}/>
+          {/* <input
             type="password"
             id="password"
             value={passwordState.value}
             onChange={passwordChangeHandler}
             onBlur={validatePasswordHandler}
-          />
+          /> */}
         </div>
 
         
@@ -153,13 +161,16 @@ const Login = (props) => {
           }`}
         >
           <label htmlFor="college">College Name</label>
-          <input
+          <Input type={"text"} id={"college"} value={enteredCollege} onChange={collegeChangeHandler}
+            onBlur={validateCollegeHandler}/>
+          
+          {/* <input
             type="text"
             id="college"
             value={enteredCollege}
             onChange={collegeChangeHandler}
             onBlur={validateCollegeHandler}
-          />
+          /> */}
         </div>
 
         <div className={classes.actions}>
